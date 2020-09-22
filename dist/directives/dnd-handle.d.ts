@@ -1,9 +1,9 @@
 import { ElementRef } from '@angular/core';
 import { DndState } from '../services';
 export declare class DndHandle {
-    private element;
-    private dndState;
-    private dragState;
+    readonly element: ElementRef;
+    readonly dndState: DndState;
+    private readonly dragState;
     private nativeElement;
     private draggableString;
     constructor(element: ElementRef, dndState: DndState);

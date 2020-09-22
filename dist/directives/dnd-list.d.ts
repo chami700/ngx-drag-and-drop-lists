@@ -3,8 +3,8 @@ import { DndState, DndListSettings } from '../services';
 import { Subject } from 'rxjs';
 export declare const dropAccepted: Subject<any>;
 export declare class DndList implements OnInit, OnDestroy {
-    private element;
-    private dndState;
+    readonly element: ElementRef;
+    private readonly dndState;
     option: DndListSettings;
     dndModel: any[];
     set dndPlaceholder(placeholder: Element);

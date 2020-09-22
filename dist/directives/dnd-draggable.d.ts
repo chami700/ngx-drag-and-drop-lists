@@ -2,8 +2,8 @@ import { OnDestroy, OnInit, ElementRef, EventEmitter } from '@angular/core';
 import { DndState } from '../services';
 import { DndDraggableConfig } from '../index';
 export declare class DndDraggable implements OnInit, OnDestroy {
-    private element;
-    private dndState;
+    private readonly element;
+    private readonly dndState;
     option: DndDraggableConfig;
     dndType: string;
     dndObject: HTMLElement;
@@ -15,9 +15,8 @@ export declare class DndDraggable implements OnInit, OnDestroy {
     dndMoved: EventEmitter<any>;
     dndCanceled: EventEmitter<any>;
     dndSelected: EventEmitter<any>;
-    private dragState;
+    private readonly dragState;
     private dropSubscription;
-    private nativeElement;
     private draggableString;
     constructor(element: ElementRef, dndState: DndState);
     ngOnInit(): void;

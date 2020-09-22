@@ -25,9 +25,8 @@ var DndDraggable = (function () {
         this.dndSelected = new EventEmitter();
         this.draggableString = 'draggable';
         this.dragState = dndState.dragState;
-        this.nativeElement = element.nativeElement;
-        this.nativeElement.nativeElement.setAttribute(this.draggableString, 'true');
-        this.nativeElement.nativeElement.onselectstart = function () {
+        this.element.nativeElement.setAttribute(this.draggableString, 'true');
+        this.element.nativeElement.onselectstart = function () {
             if (this.dragDrop)
                 this.dragDrop();
         };
@@ -35,7 +34,7 @@ var DndDraggable = (function () {
     Object.defineProperty(DndDraggable.prototype, "disableDrag", {
         set: function (disable) {
             if (disable !== undefined) {
-                this.nativeElement.nativeElement.setAttribute(this.draggableString, (!disable).toString());
+                this.element.nativeElement.setAttribute(this.draggableString, (!disable).toString());
             }
         },
         enumerable: true,
@@ -59,7 +58,7 @@ var DndDraggable = (function () {
     };
     DndDraggable.prototype.handleDragStart = function (event) {
         var _this = this;
-        if (this.nativeElement.nativeElement.getAttribute(this.draggableString) === 'false')
+        if (this.element.nativeElement.getAttribute(this.draggableString) === 'false')
             return;
         this.dragState.isDragging = true;
         this.dragState.itemType = this.dndType;
@@ -84,14 +83,14 @@ var DndDraggable = (function () {
                 event.dataTransfer.setData(MSIE_MIME_TYPE, data);
             }
         }
-        this.nativeElement.nativeElement.classList.add('dndDragging');
+        this.element.nativeElement.classList.add('dndDragging');
         setTimeout(function () {
             if (_this.dragState.effectAllowed === 'move') {
-                _this.nativeElement.nativeElement.style.display = 'none';
+                _this.element.nativeElement.style.display = 'none';
             }
         });
         if (event._dndHandle && event.dataTransfer.setDragImage) {
-            event.dataTransfer.setDragImage(this.nativeElement.nativeElement, 0, 0);
+            event.dataTransfer.setDragImage(this.element.nativeElement, 0, 0);
         }
         this.dndDragStart.emit();
         event.stopPropagation();
@@ -99,13 +98,13 @@ var DndDraggable = (function () {
     DndDraggable.prototype.handleDragEnd = function (event) {
         var _this = this;
         this.dragState.isDragging = false;
-        this.nativeElement.nativeElement.classList.remove('dndDragging');
-        this.nativeElement.nativeElement.style.removeProperty('display');
+        this.element.nativeElement.classList.remove('dndDragging');
+        this.element.nativeElement.style.removeProperty('display');
         event.stopPropagation();
-        setTimeout((function () { return _this.nativeElement.nativeElement.classList.remove('dndDraggingSource'); }), 0);
+        setTimeout((function () { return _this.element.nativeElement.classList.remove('dndDraggingSource'); }), 0);
     };
     DndDraggable.prototype.handleClick = function (event) {
-        if (this.nativeElement.nativeElement.hasAttribute('dndSelected'))
+        if (this.element.nativeElement.hasAttribute('dndSelected'))
             return;
         event = event['originalEvent'] || event;
         this.dndSelected.emit();
